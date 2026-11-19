@@ -101,6 +101,46 @@
     .card,.chip,.btn{transition:none}
   }
 </style>
+<style>
+  /* ===== v2 patterns: marquee, stats, timeline, bento, dark scene, spotlight ===== */
+  .eyebrow{font-size:.8rem;font-weight:700;letter-spacing:.35em;color:var(--accent);margin-bottom:2px}
+  /* Skills marquee */
+  .marquee{overflow:hidden;padding:26px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+  .marquee-track{display:flex;gap:26px;width:max-content;animation:marquee 30s linear infinite;will-change:transform}
+  .marquee:hover .marquee-track{animation-play-state:paused}
+  .marquee-track span{font-size:1.05rem;font-weight:700;color:var(--muted);white-space:nowrap}
+  .marquee-track i{color:var(--accent);font-style:normal}
+  @keyframes marquee{to{transform:translateX(-50%)}}
+  /* Stats band */
+  #stats{padding:44px 0 8px}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;text-align:center}
+  .stat .num{font-size:2.9rem;font-weight:800;letter-spacing:-.02em;line-height:1;
+    background:linear-gradient(92deg,var(--accent),#db2777);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+  .stat .lbl{color:var(--muted);font-size:.92rem;margin-top:8px}
+  @media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}}
+  /* Experience timeline */
+  #experiencia .job{position:relative;margin-left:16px;border-left:3px solid var(--accent-soft);border-radius:0 20px 20px 0}
+  #experiencia .job::before{content:"";position:absolute;left:-9px;top:28px;width:15px;height:15px;border-radius:50%;
+    background:var(--accent);border:3px solid var(--bg);box-shadow:0 0 0 3px var(--accent-soft)}
+  /* Projects: bento (first card featured) + spotlight hover */
+  @media(min-width:641px){ .grid .proj:first-child{grid-column:span 2} }
+  .proj{position:relative;overflow:hidden}
+  .proj::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .35s ease;
+    background:radial-gradient(340px circle at var(--mx,50%) var(--my,50%),rgba(109,40,217,.10),transparent 65%)}
+  .proj:hover::before{opacity:1}
+  .proj>*{position:relative}
+  /* Dark closing scene (Apple-style section contrast) */
+  #contacto{width:100vw;margin-left:calc(50% - 50vw);padding-left:calc(50vw - 50%);padding-right:calc(50vw - 50%);
+    background:#16121f;color:#ece9f7;border-radius:0}
+  #contacto .eyebrow{color:#a78bfa}
+  #contacto h2{color:#fff}
+  #contacto .card{background:#221c33;border-color:#352c4f;color:#ece9f7;box-shadow:none}
+  #contacto .card p{color:#b9b3d0}
+  #contacto a{color:#c4b5fd}
+  footer{background:#16121f;color:#8f89a8;border-top:1px solid #2a2340}
+  @media (prefers-reduced-motion: reduce){ .marquee-track{animation:none} }
+</style>
 </head>
 <body>
 <div id="progress"></div>
@@ -134,7 +174,22 @@
     </div>
   </div>
 
+  <div class="marquee" aria-hidden="true"><div class="marquee-track">
+    <span>HTML5</span><i>•</i><span>CSS3</span><i>•</i><span>JavaScript</span><i>•</i><span>React</span><i>•</i><span>WordPress</span><i>•</i><span>Elementor</span><i>•</i><span>Figma</span><i>•</i><span>Bootstrap</span><i>•</i><span>Python</span><i>•</i><span>SQL</span><i>•</i><span>Git</span><i>•</i><span>SEO</span><i>•</i><span>UI/UX</span><i>•</i><span>Scrum</span><i>•</i>
+    <span>HTML5</span><i>•</i><span>CSS3</span><i>•</i><span>JavaScript</span><i>•</i><span>React</span><i>•</i><span>WordPress</span><i>•</i><span>Elementor</span><i>•</i><span>Figma</span><i>•</i><span>Bootstrap</span><i>•</i><span>Python</span><i>•</i><span>SQL</span><i>•</i><span>Git</span><i>•</i><span>SEO</span><i>•</i><span>UI/UX</span><i>•</i><span>Scrum</span><i>•</i>
+  </div></div>
+
+  <section id="stats">
+    <div class="stats">
+      <div class="stat"><div class="num" data-count="4">0</div><div class="lbl" data-i18n="stat1">Roles profesionales</div></div>
+      <div class="stat"><div class="num" data-count="3">0</div><div class="lbl" data-i18n="stat2">Empresas</div></div>
+      <div class="stat"><div class="num" data-count="36">0</div><div class="lbl" data-i18n="stat3">Certificaciones</div></div>
+      <div class="stat"><div class="num" data-count="6">0</div><div class="lbl" data-i18n="stat4">Proyectos en GitHub</div></div>
+    </div>
+  </section>
+
   <section id="sobre-mi">
+    <div class="eyebrow">01</div>
     <h2 data-i18n="about_h">Sobre mí</h2>
     <div class="card">
       <p data-i18n="about_p">Desarrolladora Frontend y WordPress con experiencia implementando diseños desde Figma hasta sitios web funcionales y responsivos con WordPress y Elementor. Sólida base en HTML, CSS y JavaScript, con enfoque en experiencia de usuario, accesibilidad y SEO. En Remesworld pasé de desarrolladora frontend a Project Manager, liderando roadmap y equipo; recientemente realicé una pasantía en Kromee creando sitios WordPress a partir de diseños en Figma. Ingeniera en Sistemas por UMOV y graduada del bootcamp Full-Stack de 4Geeks Academy.</p>
@@ -142,6 +197,7 @@
   </section>
 
   <section id="experiencia">
+    <div class="eyebrow">02</div>
     <h2 data-i18n="exp_h">Experiencia</h2>
 
     <div class="card job">
@@ -174,6 +230,7 @@
   </section>
 
   <section id="proyectos">
+    <div class="eyebrow">03</div>
     <h2 data-i18n="proj_h">Proyectos</h2>
     <div class="grid">
       <div class="card proj">
@@ -216,6 +273,7 @@
   </section>
 
   <section id="habilidades">
+    <div class="eyebrow">04</div>
     <h2 data-i18n="skills_h">Habilidades</h2>
     <div class="skills">
       <span class="skill">HTML5</span><span class="skill">CSS3</span><span class="skill">JavaScript</span>
@@ -228,6 +286,7 @@
   </section>
 
   <section id="formacion">
+    <div class="eyebrow">05</div>
     <h2 data-i18n="edu_h">Formación e idiomas</h2>
     <div class="two">
       <div class="card edu">
@@ -266,6 +325,7 @@
   </section>
 
   <section id="contacto">
+    <div class="eyebrow">06</div>
     <h2 data-i18n="nav_contact">Contacto</h2>
     <div class="card" style="text-align:center">
       <p data-i18n="contact_p">¿Tienes un proyecto o una vacante? Escríbeme:</p>
@@ -287,6 +347,7 @@ const EN = {
   nav_exp:"Experience", nav_proj:"Projects", nav_skills:"Skills", nav_contact:"Contact",
   role:"Frontend & WordPress Developer",
   loc:"Mexico City · Remote", cta_proj:"View projects", cta_contact:"Contact", cta_cv:"Download CV ↓",
+  stat1:"Professional roles", stat2:"Companies", stat3:"Certifications", stat4:"GitHub projects",
   about_h:"About me",
   about_p:"Frontend and WordPress developer with experience turning Figma designs into functional, responsive websites with WordPress and Elementor. Solid foundation in HTML, CSS and JavaScript, with a focus on user experience, accessibility and SEO. At Remesworld I grew from frontend developer to Project Manager, leading roadmap and team; most recently I completed an internship at Kromee building WordPress sites from Figma designs. Systems Engineering graduate from UMOV and the 4Geeks Academy Full-Stack bootcamp.",
   exp_h:"Experience", remote:"Remote", remote2:"Remote", remote3:"Remote",
@@ -358,6 +419,37 @@ const EN = {
     if(!ticking){ ticking = true; requestAnimationFrame(onScroll); }
   }, {passive:true});
   onScroll();
+})();
+
+/* Count-up stats + project spotlight */
+(function(){
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var nums = document.querySelectorAll(".stat .num");
+  function run(el){
+    var target = parseInt(el.dataset.count, 10) || 0;
+    if(reduce){ el.textContent = target; return; }
+    var t0 = null, dur = 1300;
+    function step(ts){
+      if(!t0) t0 = ts;
+      var p = Math.min((ts - t0) / dur, 1);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+      if(p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  if("IntersectionObserver" in window && !reduce){
+    var io2 = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ run(e.target); io2.unobserve(e.target); } });
+    },{threshold:.4});
+    nums.forEach(function(n){ io2.observe(n); });
+  } else { nums.forEach(run); }
+  document.querySelectorAll(".proj").forEach(function(card){
+    card.addEventListener("mousemove", function(ev){
+      var r = card.getBoundingClientRect();
+      card.style.setProperty("--mx", ((ev.clientX - r.left) / r.width * 100) + "%");
+      card.style.setProperty("--my", ((ev.clientY - r.top) / r.height * 100) + "%");
+    });
+  });
 })();
 
 let lang = "es";
