@@ -130,9 +130,9 @@
     background:radial-gradient(340px circle at var(--mx,50%) var(--my,50%),rgba(109,40,217,.10),transparent 65%)}
   .proj:hover::before{opacity:1}
   .proj>*{position:relative}
-  /* Dark closing scene (Apple-style section contrast) */
-  #contacto{width:100vw;margin-left:calc(50% - 50vw);padding-left:calc(50vw - 50%);padding-right:calc(50vw - 50%);
-    background:#16121f;color:#ece9f7;border-radius:0}
+  /* Dark closing scene (Apple-style section contrast) — contained panel, no full-bleed overflow */
+  html,body{overflow-x:clip}
+  #contacto{background:#16121f;color:#ece9f7;border-radius:28px;padding:52px 38px;margin:24px 0 40px}
   #contacto .eyebrow{color:#a78bfa}
   #contacto h2{color:#fff}
   #contacto .card{background:#221c33;border-color:#352c4f;color:#ece9f7;box-shadow:none}
@@ -377,6 +377,9 @@ const EN = {
   contact_p:"Have a project or a role in mind? Write to me:",
   foot:"Built with HTML, CSS and JavaScript"
 };
+/* Always open at the top on a fresh visit (no browser scroll restoration) */
+if(!location.hash && "scrollRestoration" in history){ history.scrollRestoration = "manual"; window.scrollTo(0,0); }
+
 /* Scroll-driven motion: reveals, hero parallax, progress bar */
 (function(){
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
